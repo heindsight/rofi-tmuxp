@@ -3,9 +3,19 @@ name = "rofi-tmuxp"
 version = "0.0.1"
 description = "Rofi script to launch tmuxp sessions"
 authors = ["Heinrich Kruger <heindsight@kruger.dev>"]
+readme = "README.rst"
 license = "MIT"
+keywords = ["rofi", "tmux", "tmuxp"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: End Users/Desktop",
+]
 packages = [
     {include = "rofi_tmuxp.py", from="src"},
+]
+include = [
+    "LICENSE",
+    "README.rst",
 ]
 
 [tool.poetry.dependencies]
