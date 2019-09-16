@@ -7,7 +7,7 @@ import tmuxp
 from kaptan import Kaptan
 
 
-__version__ = '0.0.1'
+__version__ = "0.0.1"
 
 
 def main():
@@ -45,13 +45,9 @@ def get_sessions():
         try:
             sessions[_get_session_name(config_path)] = config_path
         except KeyError:
-            print(
-                f"No session name configured in {config_path}", file=sys.stderr
-            )
+            print(f"No session name configured in {config_path}", file=sys.stderr)
         except Exception as e:
-            print(
-                f"Error loading config {config_path}: {e!r}", file=sys.stderr
-            )
+            print(f"Error loading config {config_path}: {e!r}", file=sys.stderr)
 
     return sessions
 
