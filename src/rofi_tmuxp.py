@@ -30,7 +30,7 @@ def main():
         try:
             session = sessions[sys.argv[1]]
         except KeyError:
-            msg = f"No such session: {sys.argv[1]}"
+            msg = "No such session: {}".format(sys.argv[1])
             logger.warning(msg)
             rofi_error(msg)
             return
@@ -46,7 +46,7 @@ def get_sessions():
     config_dir = Path(tmuxp.cli.get_config_dir())
     sessions = {}
 
-    for filename in tmuxp.config.in_dir(config_dir):
+    for filename in tmuxp.config.in_dir(str(config_dir)):
         config_path = config_dir / filename
         try:
             sessions[_get_session_name(config_path)] = config_path
@@ -66,10 +66,10 @@ def _get_session_name(cfg_path):
     return config.get("session_name")
 
 
-def start_session(config_name):
+def start_session(config_path):
     """Lanuch tmuxp in a new terminal window."""
     subprocess.Popen(
-        ["rofi-sensible-terminal", "-e", "tmuxp", "load", config_name],
+        ["rofi-sensible-terminal", "-e", "tmuxp", "load", str(config_path)],
         stdout=subprocess.DEVNULL,
     )
 

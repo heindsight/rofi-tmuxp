@@ -199,7 +199,7 @@ class TestLaunchSession:
                     "-e",
                     "tmuxp",
                     "load",
-                    config_dir / config_filename,
+                    str(config_dir / config_filename),
                 ],
                 stdout=subprocess.DEVNULL,
             )
@@ -239,7 +239,7 @@ class TestLaunchSession:
                     "-e",
                     "tmuxp",
                     "load",
-                    config_dir / "test1.yml",
+                    str(config_dir / "test1.yml"),
                 ],
                 stdout=subprocess.DEVNULL,
             )

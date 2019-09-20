@@ -16,4 +16,6 @@ def match_logs(logger, level, pattern, record_tuples):
     )
 
     if not matches:
-        pytest.fail(f"{(logger, level, pattern)!r} not matched in {record_tuples!r}")
+        pytest.fail(
+            "{!r} not matched in {!r}".format((logger, level, pattern), record_tuples)
+        )

@@ -21,12 +21,12 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.5"
 kaptan = "^0.5.12"
 tmuxp = "^1.5"
 
 [tool.poetry.dev-dependencies]
-black = {version = "^18.3-alpha.0", allows-prereleases = true}
+black = {version = "^18.3-alpha.0", allows-prereleases = true, python = "^3.6"}
 flake8 = "^3.7"
 isort = "^4.3"
 pdbpp = "^0.10.0"
