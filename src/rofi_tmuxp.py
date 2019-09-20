@@ -1,4 +1,5 @@
 """Rofi script to launch tmuxp sessions"""
+import logging
 import subprocess
 import sys
 from pathlib import Path
@@ -8,6 +9,9 @@ from kaptan import Kaptan
 
 
 __version__ = "0.0.1"
+
+
+logger = logging.getLogger("rofi_tmuxp")
 
 
 def main():
@@ -26,7 +30,9 @@ def main():
         try:
             session = sessions[sys.argv[1]]
         except KeyError:
-            rofi_error(f"No such session: {sys.argv[1]}")
+            msg = f"No such session: {sys.argv[1]}"
+            logger.warning(msg)
+            rofi_error(msg)
             return
 
         start_session(session)
@@ -45,9 +51,9 @@ def get_sessions():
         try:
             sessions[_get_session_name(config_path)] = config_path
         except KeyError:
-            print(f"No session name configured in {config_path}", file=sys.stderr)
+            logger.warning("No session name configured in '%s'", config_path)
         except Exception as e:
-            print(f"Error loading config {config_path}: {e!r}", file=sys.stderr)
+            logger.warning("Error loading config '%s': %r", config_path, e)
 
     return sessions
 
@@ -73,5 +79,10 @@ def rofi_error(message):
     subprocess.Popen(["rofi", "-e", message], stdout=subprocess.DEVNULL)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
+    logging.basicConfig(
+        style="{",
+        level=logging.WARNING,
+        fmt="{asctime} - {name} - {levelname} - {message}",
+    )
     main()
