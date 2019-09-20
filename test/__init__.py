@@ -15,7 +15,7 @@ def match_logs(logger, level, pattern, record_tuples):
         for lggr, lvl, msg in record_tuples
     )
 
-    if not matches:
+    if not matches:  # pragma: no cover
         pytest.fail(
             "{!r} not matched in {!r}".format((logger, level, pattern), record_tuples)
         )
