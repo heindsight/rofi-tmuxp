@@ -34,6 +34,7 @@ pytest = "^5.1"
 pytest-cov = "^2.7"
 pytest-mock = "^1.10"
 tox = "^3.14"
+rstcheck = "^3.3"
 
 [tool.poetry.scripts]
 rofi-tmux = "rofi_tmuxp:main"
