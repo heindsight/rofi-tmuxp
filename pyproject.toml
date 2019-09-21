@@ -1,42 +1,35 @@
-[tool.poetry]
-name = "rofi-tmuxp"
-version = "0.0.1"
-description = "Rofi script to launch tmuxp sessions"
-authors = ["Heinrich Kruger <heindsight@kruger.dev>"]
-homepage = "https://github.com/heindsight/rofi-tmuxp"
-repository = "https://github.com/heindsight/rofi-tmuxp"
-readme = "README.rst"
-license = "MIT"
-keywords = ["rofi", "tmux", "tmuxp"]
+[tool.flit.metadata]
+dist-name = "rofi-tmuxp"
+module = "rofi_tmuxp"
+author = "Heinrich Kruger"
+author-email = "heindsight@kruger.dev"
+home-page = "https://github.com/heindsight/rofi-tmuxp"
+description-file = "README.rst"
+keywords = "rofi tmux tmuxp"
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License"
 ]
-packages = [
-    {include = "rofi_tmuxp.py", from="src"},
-]
-include = [
-    "LICENSE",
-    "README.rst",
+requires-python = "~=3.5"
+requires = [
+    "kaptan ~= 0.5.12",
+    "tmuxp ~= 1.5"
 ]
 
-[tool.poetry.dependencies]
-python = "^3.5"
-kaptan = "^0.5.12"
-tmuxp = "^1.5"
+[tool.flit.metadata.requires-extra]
+dev = [
+    "black; python_version >= '3.6'",
+    "flake8",
+    "isort",
+    "pdbpp",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "rstcheck",
+]
 
-[tool.poetry.dev-dependencies]
-black = {version = "^18.3-alpha.0", allows-prereleases = true, python = "^3.6"}
-flake8 = "^3.7"
-isort = "^4.3"
-pdbpp = "^0.10.0"
-pytest = "^5.1"
-pytest-cov = "^2.7"
-pytest-mock = "^1.10"
-tox = "^3.14"
-rstcheck = "^3.3"
-
-[tool.poetry.scripts]
+[tool.flit.scripts]
 rofi-tmux = "rofi_tmuxp:main"
 
 [tool.isort]
@@ -46,5 +39,5 @@ lines_after_imports = 2
 known_first_party = ["test"]
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["flit"]
+build-backend = "flit.buildapi"
