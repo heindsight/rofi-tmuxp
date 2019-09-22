@@ -19,10 +19,12 @@ requires = [
 
 [tool.flit.metadata.requires-extra]
 dev = [
+    "pdbpp",
+]
+test = [
     "black; python_version >= '3.6'",
     "flake8",
     "isort",
-    "pdbpp",
     "pytest",
     "pytest-cov",
     "pytest-mock",
