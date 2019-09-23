@@ -13,8 +13,8 @@ classifiers = [
 ]
 requires-python = "~=3.5"
 requires = [
-    "kaptan ~= 0.5.12",
-    "tmuxp ~= 1.5"
+    "kaptan ~= 0.5.7",
+    "tmuxp ~= 1.1"
 ]
 
 [tool.flit.metadata.requires-extra]
