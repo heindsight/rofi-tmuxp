@@ -21,6 +21,7 @@ def main():
     sessions. Otherwise, run tmuxp in a new terminal with the session provided
     on the command line.
     """
+    _setup_logging()
     sessions = get_sessions()
 
     if len(sys.argv) == 1:
@@ -79,10 +80,13 @@ def rofi_error(message):
     subprocess.Popen(["rofi", "-e", message], stdout=subprocess.DEVNULL)
 
 
-if __name__ == "__main__":  # pragma: no cover
+def _setup_logging():
     logging.basicConfig(
         style="{",
         level=logging.WARNING,
-        fmt="{asctime} - {name} - {levelname} - {message}",
+        format="{asctime} - {name} - {levelname} - {message}",
     )
+
+
+if __name__ == "__main__":  # pragma: no cover
     main()
