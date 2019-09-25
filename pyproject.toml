@@ -1,3 +1,7 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
 [tool.flit.metadata]
 dist-name = "rofi-tmuxp"
 module = "rofi_tmuxp"
@@ -7,9 +11,10 @@ home-page = "https://github.com/heindsight/rofi-tmuxp"
 description-file = "README.rst"
 keywords = "rofi tmux tmuxp"
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: End Users/Desktop",
-    "License :: OSI Approved :: MIT License"
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Desktop Environment :: Window Managers"
 ]
 requires-python = "~=3.5"
 requires = [
@@ -39,7 +44,3 @@ line_width = 88
 multi_line_output = 5
 lines_after_imports = 2
 known_first_party = ["test"]
-
-[build-system]
-requires = ["flit"]
-build-backend = "flit.buildapi"
