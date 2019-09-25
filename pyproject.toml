@@ -18,7 +18,7 @@ classifiers = [
 ]
 requires-python = "~=3.5"
 requires = [
-    "kaptan ~= 0.5.7",
+    "kaptan ~= 0.5.9",
     "tmuxp ~= 1.1"
 ]
 
