@@ -10,11 +10,16 @@ author-email = "heindsight@kruger.dev"
 home-page = "https://github.com/heindsight/rofi-tmuxp"
 description-file = "README.rst"
 keywords = "rofi tmux tmuxp"
+license = "MIT"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: End Users/Desktop",
     "License :: OSI Approved :: MIT License",
-    "Topic :: Desktop Environment :: Window Managers"
+    "Topic :: Desktop Environment :: Window Managers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
 ]
 requires-python = "~=3.5"
 requires = [
