@@ -2,7 +2,24 @@
 Rofi TmuxP
 ==========
 
-Use Rofi_ to launch tmuxp_ sessions.
+.. pull-quote::
+
+   Use Rofi_ to launch tmuxp_ sessions.
+
+.. image:: https://img.shields.io/pypi/v/rofi-tmuxp.svg
+    :target: https://pypi.org/project/rofi-tmuxp/
+
+.. image:: https://img.shields.io/pypi/pyversions/rofi-tmuxp.svg
+    :target: https://pypi.org/project/rofi-tmuxp/
+
+.. image:: https://img.shields.io/pypi/format/rofi-tmuxp.svg
+    :target: https://pypi.org/project/rofi-tmuxp/
+
+.. image:: https://travis-ci.org/heindsight/rofi-tmuxp.svg?branch=master
+    :target: https://travis-ci.org/heindsight/rofi-tmuxp
+
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
 
 Installation
 ------------
