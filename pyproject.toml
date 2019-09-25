@@ -37,7 +37,7 @@ test = [
 ]
 
 [tool.flit.scripts]
-rofi-tmux = "rofi_tmuxp:main"
+rofi-tmuxp = "rofi_tmuxp:main"
 
 [tool.isort]
 line_width = 88
