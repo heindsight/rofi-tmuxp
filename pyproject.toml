@@ -1,3 +1,7 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
 [tool.flit.metadata]
 dist-name = "rofi-tmuxp"
 module = "rofi_tmuxp"
@@ -6,23 +10,31 @@ author-email = "heindsight@kruger.dev"
 home-page = "https://github.com/heindsight/rofi-tmuxp"
 description-file = "README.rst"
 keywords = "rofi tmux tmuxp"
+license = "MIT"
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: End Users/Desktop",
-    "License :: OSI Approved :: MIT License"
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Desktop Environment :: Window Managers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.5",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
 ]
 requires-python = "~=3.5"
 requires = [
-    "kaptan ~= 0.5.12",
-    "tmuxp ~= 1.5"
+    "kaptan ~= 0.5.9",
+    "tmuxp ~= 1.1"
 ]
 
 [tool.flit.metadata.requires-extra]
 dev = [
+    "pdbpp",
+]
+test = [
     "black; python_version >= '3.6'",
     "flake8",
     "isort",
-    "pdbpp",
     "pytest",
     "pytest-cov",
     "pytest-mock",
@@ -30,14 +42,10 @@ dev = [
 ]
 
 [tool.flit.scripts]
-rofi-tmux = "rofi_tmuxp:main"
+rofi-tmuxp = "rofi_tmuxp:main"
 
 [tool.isort]
 line_width = 88
 multi_line_output = 5
 lines_after_imports = 2
 known_first_party = ["test"]
-
-[build-system]
-requires = ["flit"]
-build-backend = "flit.buildapi"

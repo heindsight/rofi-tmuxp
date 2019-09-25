@@ -154,7 +154,7 @@ class TestPrintsSessions:
         assert captured.out == ""
 
     def test_safe_yaml(self, config_dir, write_config, caplog, capsys):
-        write_config("danger.yaml", "session_name: !!python/object/apply: object []")
+        write_config("danger.yaml", "session_name: !!python/object/apply:object []")
 
         rofi_tmuxp.main()
 
