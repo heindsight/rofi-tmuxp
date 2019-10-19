@@ -2,27 +2,29 @@ dist: xenial
 sudo: false
 language: python
 
-if: type = pull_request OR type = push
-  python:
-    - "3.5"
-    - "3.6"
-    - "3.7"
-    - "3.8"
 
-  stages:
-    - lint
-    - test
+stages:
+  - lint
+  - name: test
+    if: type != cron
+  - name: periodic-tests
+    if: type = cron
 
-  jobs:
-    include:
-      - stage: lint
-        python: "3.7"
-        env: TOXENV=lint
+jobs:
+  include:
+    - stage: test
+      python: "3.5"
+    - python: "3.6"
+    - python: "3.7"
+    - python: "3.8"
 
-if: type = cron
-  python: "3.7"
-  env: TOXENV=py37
+    - stage: periodic-tests
+      python: "3.7"
+      env: TOXENV=py37
 
+    - stage: lint
+      python: "3.7"
+      env: TOXENV=lint
 
 install: pip install tox-travis
 script: tox
