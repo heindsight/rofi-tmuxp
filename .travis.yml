@@ -3,9 +3,8 @@ sudo: false
 language: python
 
 stages:
-- name: lint
-  if: type != cron
-- name: test
+- lint
+- test
 
 jobs:
   include:
@@ -14,16 +13,16 @@ jobs:
     env: TOXENV=lint
 
   - stage: test
-    if: type != cron
+    if: type = pull_request
     python: "3.5"
-  - if: type != cron
+  - if: type = pull_request
     python: "3.6"
-  - if: type != cron
+  - if: type = pull_request
     python: "3.7"
-  - if: type != cron
+  - if: type = pull_request
     python: "3.8"
 
-  - if: type = cron
+  - if: type IN (cron, push)
     python: "3.7"
     env: TOXENV=py37
 
