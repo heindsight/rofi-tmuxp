@@ -15,19 +15,18 @@ jobs:
     env: TOXENV=lint
 
   - stage: test
+    if: type != cron
     python: "3.5"
-    if: type != cron
-  - python: "3.6"
-    if: type != cron
-  - python: "3.7"
-    if: type != cron
-  - python: "3.8"
-    if: type != cron
+  - if: type != cron
+    python: "3.6"
+  - if: type != cron
+    python: "3.7"
+  - if: type != cron
+    python: "3.8"
 
-  - name: periodic
+  - if: type = cron
     python: "3.7"
     env: TOXENV=py37
-    if: type = cron
 
 install: pip install tox-travis
 script: tox
