@@ -64,4 +64,4 @@ Copyright (c) Heinrich Kruger. Distributed under the `MIT license`_.
 .. _Rofi: https://github.com/davatorium/rofi
 .. _tmuxp: http://tmuxp.git-pull.com/
 .. _tmuxp python API: https://tmuxp.git-pull.com/en/latest/api.html
-.. _MIT license: LICENSE
+.. _MIT license: https://github.com/heindsight/rofi-tmuxp/blob/master/LICENSE
