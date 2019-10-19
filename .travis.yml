@@ -2,12 +2,6 @@ dist: xenial
 sudo: false
 language: python
 
-branches:
-  only:
-  - master
-  - develop
-
-
 stages:
 - name: lint
   if: type != cron
