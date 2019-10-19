@@ -47,6 +47,9 @@ rofi-tmuxp = "rofi_tmuxp:main"
 
 [tool.isort]
 line_width = 88
-multi_line_output = 5
+multi_line_output = 3
 lines_after_imports = 2
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
 known_first_party = ["test"]
