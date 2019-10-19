@@ -7,19 +7,12 @@ branches:
   - master
   - develop
 
-python:
-- "3.5"
-- "3.6"
-- "3.7"
-- "3.8"
 
 stages:
 - name: lint
   if: type != cron
 - name: test
   if: type != cron
-- name: periodic
-  if: type = cron
 
 jobs:
   include:
@@ -27,9 +20,18 @@ jobs:
     python: "3.7"
     env: TOXENV=lint
 
-  - stage: periodic
+  - stage: test
+    python:
+    - "3.5"
+    - "3.6"
+    - "3.7"
+    - "3.8"
+    if: type != cron
+
+  - name: periodic
     python: "3.7"
     env: TOXENV=py37
+    if: type = cron
 
 install: pip install tox-travis
 script: tox
