@@ -2,28 +2,28 @@ dist: xenial
 sudo: false
 language: python
 python:
-  - "3.5"
-  - "3.6"
-  - "3.7"
-  - "3.8"
+- "3.5"
+- "3.6"
+- "3.7"
+- "3.8"
 
 stages:
-  - name: lint
-    if: type != cron
-  - name: test
-    if: type != cron
-  - name: periodic
-    if: type = cron
+- name: lint
+  if: type != cron
+- name: test
+  if: type != cron
+- name: periodic
+  if: type = cron
 
 jobs:
   include:
-    - stage: lint
-      python: "3.7"
-      env: TOXENV=lint
+  - stage: lint
+    python: "3.7"
+    env: TOXENV=lint
 
-    - stage: periodic
-      python: "3.7"
-      env: TOXENV=py37
+  - stage: periodic
+    python: "3.7"
+    env: TOXENV=py37
 
 install: pip install tox-travis
 script: tox
