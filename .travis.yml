@@ -12,8 +12,8 @@ jobs:
     python: "3.7"
     env: TOXENV=lint
 
-  - stage: test
-    if: type = pull_request
+  - if: type = pull_request
+    stage: test
     python: "3.5"
   - if: type = pull_request
     python: "3.6"
@@ -23,6 +23,7 @@ jobs:
     python: "3.8"
 
   - if: type IN (cron, push)
+    stage: test
     python: "3.7"
     env: TOXENV=py37
 
