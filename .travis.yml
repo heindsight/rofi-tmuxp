@@ -6,7 +6,6 @@ stages:
 - name: lint
   if: type != cron
 - name: test
-  if: type != cron
 
 jobs:
   include:
