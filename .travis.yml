@@ -28,4 +28,4 @@ jobs:
     env: TOXENV=py37
 
 install: pip install tox-travis
-script: tox
+script: tox -vv
