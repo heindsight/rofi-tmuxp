@@ -6,10 +6,6 @@ stages:
 - lint
 - test
 
-env:
-  global:
-    - VIRTUALENV_DOWNLOAD=1
-
 jobs:
   include:
   - stage: lint
