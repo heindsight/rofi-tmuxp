@@ -5,7 +5,7 @@ on:
   pull_request:
   schedule:
     # Run tests monthly
-    cron: "15 0 1 * *"
+    - cron: "15 0 1 * *"
 
 jobs:
   test:
