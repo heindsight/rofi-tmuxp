@@ -1,7 +1,11 @@
 ---
 name: Tests
 
-on: pull_request
+on:
+  pull_request:
+  schedule:
+    # Run tests monthly
+    cron: "15 0 1 * *"
 
 jobs:
   test:
