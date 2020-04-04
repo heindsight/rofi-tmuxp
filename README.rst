@@ -15,8 +15,8 @@ Rofi TmuxP
 .. image:: https://img.shields.io/pypi/format/rofi-tmuxp.svg
     :target: https://pypi.org/project/rofi-tmuxp/
 
-.. image:: https://travis-ci.org/heindsight/rofi-tmuxp.svg?branch=master
-    :target: https://travis-ci.org/heindsight/rofi-tmuxp
+.. image:: https://github.com/heindsight/rofi-tmuxp/workflows/Tests/badge.svg
+    :target: https://github.com/heindsight/rofi-tmuxp/actions?query=workflow%3ATests
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
