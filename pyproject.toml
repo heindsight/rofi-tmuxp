@@ -36,7 +36,7 @@ dev = [
 test = [
     "black; python_version >= '3.6'",
     "flake8",
-    "isort",
+    "isort ~= 5.0.0; python_version >= '3.6'",
     "pytest",
     "pytest-cov",
     "pytest-mock",
@@ -48,10 +48,5 @@ test = [
 rofi-tmuxp = "rofi_tmuxp:main"
 
 [tool.isort]
-line_width = 88
-multi_line_output = 3
+profile="black"
 lines_after_imports = 2
-include_trailing_comma = true
-force_grid_wrap = 0
-use_parentheses = true
-known_first_party = ["test"]
