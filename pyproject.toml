@@ -36,7 +36,7 @@ dev = [
 test = [
     "black; python_version >= '3.6'",
     "flake8",
-    "isort ~= 5.0.0",
+    "isort ~= 5.0.0; python_version >= '3.6'",
     "pytest",
     "pytest-cov",
     "pytest-mock",
