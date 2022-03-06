@@ -17,15 +17,13 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Topic :: Desktop Environment :: Window Managers",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.5",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
 ]
-requires-python = "~=3.5"
+requires-python = "~=3.7"
 requires = [
-    "kaptan ~= 0.5.9",
+    "kaptan ~= 0.5.10",
     "tmuxp ~= 1.1"
 ]
 
@@ -34,9 +32,9 @@ dev = [
     "pdbpp",
 ]
 test = [
-    "black; python_version >= '3.6'",
+    "black",
     "flake8",
-    "isort ~= 5.0.0; python_version >= '3.6'",
+    "isort ~= 5.0.0",
     "pytest",
     "pytest-cov",
     "pytest-mock",
