@@ -30,16 +30,10 @@ requires = [
 
 [tool.flit.metadata.requires-extra]
 dev = [
-    "pdbpp",
-]
-test = [
     "black",
     "flake8",
     "isort ~= 5.0.0",
-    "pytest",
-    "pytest-cov",
-    "pytest-mock",
-    "pytest-randomly",
+    "pdbpp",
     "rstcheck",
 ]
 
