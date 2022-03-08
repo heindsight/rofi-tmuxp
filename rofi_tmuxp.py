@@ -8,9 +8,6 @@ import tmuxp
 from kaptan import Kaptan
 
 
-__version__ = "0.1.0"
-
-
 logger = logging.getLogger("rofi_tmuxp")
 
 
