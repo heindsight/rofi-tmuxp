@@ -206,7 +206,7 @@ class TestLaunchSession:
                     "-e",
                     "tmuxp",
                     "load",
-                    str(config_dir / config_filename),
+                    session_name,
                 ],
                 stdout=subprocess.DEVNULL,
             )
@@ -220,16 +220,16 @@ class TestLaunchSession:
 
         assert mock_popen.call_args_list == [
             mocker.call(
-                ["rofi", "-e", "No such session: I don't exist"],
+                [
+                    "rofi-sensible-terminal",
+                    "-e",
+                    "tmuxp",
+                    "load",
+                    "I don't exist",
+                ],
                 stdout=subprocess.DEVNULL,
             )
         ]
-        match_logs(
-            "rofi_tmuxp",
-            logging.WARNING,
-            r"No such session: I don't exist",
-            caplog.record_tuples,
-        )
 
     @pytest.mark.usefixtures("configs")
     def test_ignore_extra_args(self, monkeypatch, mocker, mock_popen, config_dir):
@@ -246,7 +246,7 @@ class TestLaunchSession:
                     "-e",
                     "tmuxp",
                     "load",
-                    str(config_dir / "test1.yml"),
+                    "test session 1",
                 ],
                 stdout=subprocess.DEVNULL,
             )

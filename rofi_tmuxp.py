@@ -19,21 +19,13 @@ def main():
     on the command line.
     """
     _setup_logging()
-    sessions = get_sessions()
 
     if len(sys.argv) == 1:
-        for session in sorted(sessions):
+        for session in sorted(get_sessions()):
             print(session)
     else:
-        try:
-            session = sessions[sys.argv[1]]
-        except KeyError:
-            msg = "No such session: {}".format(sys.argv[1])
-            logger.warning(msg)
-            rofi_error(msg)
-            return
-
-        start_session(session)
+        session_name = sys.argv[1]
+        start_session(session_name)
 
 
 def get_sessions():
@@ -42,7 +34,6 @@ def get_sessions():
     Returns a dictionary mapping session name to config file paths.
     """
     config_dir = Path(tmuxp.cli.get_config_dir())
-    sessions = {}
 
     for filename in tmuxp.config.in_dir(str(config_dir)):
         config_path = config_dir / filename
@@ -53,9 +44,8 @@ def get_sessions():
         except Exception as e:
             logger.warning("Error loading config '%s': %r", config_path, e)
         else:
-            sessions[config["session_name"]] = config_path
+            yield config["session_name"]
 
-    return sessions
 
 
 def _load_config(cfg_path):
@@ -72,17 +62,12 @@ def _load_config(cfg_path):
     return tmuxp.cli.config.trickle(config)
 
 
-def start_session(config_path):
+def start_session(session_name):
     """Lanuch tmuxp in a new terminal window."""
     subprocess.Popen(
-        ["rofi-sensible-terminal", "-e", "tmuxp", "load", str(config_path)],
+        ["rofi-sensible-terminal", "-e", "tmuxp", "load", session_name],
         stdout=subprocess.DEVNULL,
     )
-
-
-def rofi_error(message):
-    """Display an error message using the rofi error dialog"""
-    subprocess.Popen(["rofi", "-e", message], stdout=subprocess.DEVNULL)
 
 
 def _setup_logging():
