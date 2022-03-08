@@ -1,16 +1,16 @@
 [build-system]
-requires = ["flit_core >=2,<3"]
+requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
-[tool.flit.metadata]
-dist-name = "rofi-tmuxp"
-module = "rofi_tmuxp"
-author = "Heinrich Kruger"
-author-email = "heindsight@kruger.dev"
-home-page = "https://github.com/heindsight/rofi-tmuxp"
-description-file = "README.rst"
-keywords = "rofi tmux tmuxp"
-license = "MIT"
+[project]
+name = "rofi-tmuxp"
+authors = [
+    {name = "Heinrich Kruger", email = "heindsight@kruger.dev"}
+]
+readme = "README.rst"
+version = "0.1.1.dev1"
+dynamic = ["description"]
+keywords = ["rofi", "tmux", "tmuxp"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: End Users/Desktop",
@@ -23,12 +23,12 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 requires-python = "~=3.7"
-requires = [
+dependencies = [
     "kaptan ~= 0.5.10",
     "tmuxp ~= 1.1"
 ]
 
-[tool.flit.metadata.requires-extra]
+[project.optional-dependencies]
 dev = [
     "black",
     "flake8",
@@ -37,8 +37,21 @@ dev = [
     "rstcheck",
 ]
 
-[tool.flit.scripts]
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+homepage = "https://github.com/heindsight/rofi-tmuxp"
+
+[project.scripts]
 rofi-tmuxp = "rofi_tmuxp:main"
+
+[tool.flit.module]
+name = "rofi_tmuxp"
+
+[tool.flit.sdist]
+include = ["test/", "tox.ini"]
+exclude = [".github/", ".gitignore"]
 
 [tool.isort]
 profile="black"
