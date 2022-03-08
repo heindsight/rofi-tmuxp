@@ -45,22 +45,27 @@ def mock_get_config_dir(mocker, config_dir):
 
 
 @pytest.fixture
-def session_info():
+def session_cfg():
+    return {"windows": []}
+
+
+@pytest.fixture
+def session_info(session_cfg):
     return [
         {
             "filename": "test1.yml",
             "filetype": "yaml",
-            "data": {"session_name": "test session 1"},
+            "data": {**session_cfg, "session_name": "test session 1"},
         },
         {
             "filename": "( ͡° ͜ʖ ͡°).json",
             "filetype": "json",
-            "data": {"session_name": "田中さんにあげて下さい"},
+            "data": {**session_cfg, "session_name": "田中さんにあげて下さい"},
         },
         {
             "filename": "session.yaml",
             "filetype": "yaml",
-            "data": {"session_name": "Session 💩"},
+            "data": {**session_cfg, "session_name": "Session 💩"},
         },
     ]
 
@@ -106,7 +111,9 @@ class TestPrintsSessions:
         match_logs(
             "rofi_tmuxp",
             logging.WARNING,
-            r"No session name configured in '{}'".format(config_dir / "invalid.yaml"),
+            r'Invalid config \'{}\': config requires "session_name"'.format(
+                config_dir / "invalid.yaml"
+            ),
             caplog.record_tuples,
         )
 

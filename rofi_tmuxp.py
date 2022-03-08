@@ -47,21 +47,29 @@ def get_sessions():
     for filename in tmuxp.config.in_dir(str(config_dir)):
         config_path = config_dir / filename
         try:
-            sessions[_get_session_name(config_path)] = config_path
-        except KeyError:
-            logger.warning("No session name configured in '%s'", config_path)
+            config = _load_config(config_path)
+        except tmuxp.exc.ConfigError as e:
+            logger.warning("Invalid config '%s': %s", config_path, e)
         except Exception as e:
             logger.warning("Error loading config '%s': %r", config_path, e)
+        else:
+            sessions[config["session_name"]] = config_path
 
     return sessions
 
 
-def _get_session_name(cfg_path):
-    """Extract the session name from a tmuxp config file"""
+def _load_config(cfg_path):
+    """Load config from a given config file.
+
+    Raises tmuxp.exc.ConfigError if the config is not valid."""
     config = Kaptan()
     config.import_config(str(cfg_path))
+    config = config.configuration_data
 
-    return config.get("session_name")
+    tmuxp.config.validate_schema(config)
+
+    config = tmuxp.cli.config.expand(config)
+    return tmuxp.cli.config.trickle(config)
 
 
 def start_session(config_path):
