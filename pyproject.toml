@@ -37,6 +37,9 @@ dev = [
     "rstcheck",
 ]
 
+[project.license]
+file = "LICENSE"
+
 [project.urls]
 homepage = "https://github.com/heindsight/rofi-tmuxp"
 
@@ -47,6 +50,7 @@ rofi-tmuxp = "rofi_tmuxp:main"
 name = "rofi_tmuxp"
 
 [tool.flit.sdist]
+include = ["test/", "tox.ini"]
 exclude = [".github/", ".gitignore"]
 
 [tool.isort]
