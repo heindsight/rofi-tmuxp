@@ -47,7 +47,6 @@ def get_sessions():
             yield config["session_name"]
 
 
-
 def _load_config(cfg_path):
     """Load config from a given config file.
 
