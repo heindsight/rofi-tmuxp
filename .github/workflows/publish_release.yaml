@@ -1,0 +1,19 @@
+---
+name: Publish Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-test-pypi:
+    if: release.draft
+    uses: ./github/workflows/build_publish.yaml
+    with:
+      repository_url: https://test.pypi.org/legacy/
+      pypi_token: ${{ secrets.TEST_PYPI_TOKEN }}
+  publish-pypi:
+    if: ! release.draft
+    uses: ./github/workflows/build_publish.yaml
+    with:
+      pypi_token: ${{ secrets.PYPI_TOKEN }}

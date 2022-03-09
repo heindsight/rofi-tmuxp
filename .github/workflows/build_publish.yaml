@@ -1,0 +1,36 @@
+---
+name: Build and publish
+
+on:
+  workflow_call:
+    inputs:
+      repository_url:
+        type: string
+        required: false
+    secrets:
+      pypi_token:
+        type: string
+        required: true
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flit
+      - name: Build package
+        run: flit build
+      - name: publish package
+        uses: pypa/gh-action-pypi-publish@v1.5.0
+        with:
+          user: __token__
+          password: ${{ secrets.pypi_token }}
+          repository_url: ${{ inputs.repository_url }}
