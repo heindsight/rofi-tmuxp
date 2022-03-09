@@ -47,7 +47,10 @@ you rofi config file.  E.g.
 
 .. code-block::
 
-   rofi.modi: run,ssh,tmuxp:rofi-tmuxp
+   configuration {
+       /* Enable run and tmuxp modes */
+       modi: "run,tmuxp:rofi-tmuxp";
+   }
 
 Then you can run rofi like:
 
