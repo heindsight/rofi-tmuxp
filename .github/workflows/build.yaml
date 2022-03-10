@@ -31,18 +31,28 @@ jobs:
   publish-test-pypi:
     if: action == 'release' && release.draft
     needs: build
-    download: dist-packages
-    uses: pypa/gh-action-pypi-publish@v1.5.0
-    with:
-      user: __token__
-      password: ${{ secrets.TEST_PYPI_TOKEN }}
-      repository_url: ${{ inputs.repository_url }}
+    steps:
+      - name: Download dist artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-packages
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@v1.5.0
+        with:
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
 
   publish-pypi:
     if: action == 'release' && ! release.draft
     needs: build
-    download: dist-packages
-    uses: pypa/gh-action-pypi-publish@v1.5.0
-    with:
-      user: __token__
-      password: ${{ secrets.PYPI_TOKEN }}
+    steps:
+      - name: Download dist artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-packages
+      - name: publish
+        uses: pypa/gh-action-pypi-publish@v1.5.0
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
