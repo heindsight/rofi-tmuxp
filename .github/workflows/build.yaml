@@ -29,7 +29,7 @@ jobs:
           path: dist/
 
   publish-test-pypi:
-    if: github.action == 'release' && github.event.release.draft
+    if: github.action == 'published' && github.event.release.draft
     needs: build
     runs-on: ubuntu-latest
 
@@ -46,7 +46,7 @@ jobs:
           repository_url: https://test.pypi.org/legacy/
 
   publish-pypi:
-    if: github.action == 'release' && ! github.event.release.draft
+    if: github.action == 'published' && ! github.event.release.draft
     needs: build
     runs-on: ubuntu-latest
 
