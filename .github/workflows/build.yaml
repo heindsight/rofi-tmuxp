@@ -31,6 +31,8 @@ jobs:
   publish-test-pypi:
     if: action == 'release' && release.draft
     needs: build
+    runs-on: ubuntu-latest
+
     steps:
       - name: Download dist artifacts
         uses: actions/download-artifact@v3
@@ -46,6 +48,8 @@ jobs:
   publish-pypi:
     if: action == 'release' && ! release.draft
     needs: build
+    runs-on: ubuntu-latest
+
     steps:
       - name: Download dist artifacts
         uses: actions/download-artifact@v3
