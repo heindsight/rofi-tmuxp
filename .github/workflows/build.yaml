@@ -2,7 +2,7 @@
 name: Build and publish package
 
 on:
-  push:
+  pull_request:
   release:
     types: [published]
 
@@ -29,9 +29,10 @@ jobs:
           path: dist/
 
   publish-test-pypi:
-    if: github.action == 'published' && github.event.release.draft
+    if: github.event_name == 'pull_request'
     needs: build
     runs-on: ubuntu-latest
+    environment: "Test PyPI"
 
     steps:
       - name: Download dist artifacts
@@ -42,13 +43,14 @@ jobs:
         uses: pypa/gh-action-pypi-publish@v1.5.0
         with:
           user: __token__
-          password: ${{ secrets.TEST_PYPI_TOKEN }}
+          password: ${{ secrets.PYPI_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
 
   publish-pypi:
-    if: github.action == 'published' && ! github.event.release.draft
+    if: github.event_name == 'release'
     needs: build
     runs-on: ubuntu-latest
+    environment: PyPI
 
     steps:
       - name: Download dist artifacts
