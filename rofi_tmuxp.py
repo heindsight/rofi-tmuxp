@@ -59,10 +59,10 @@ def _load_config(cfg_path):
     config.import_config(str(cfg_path))
     config = tmuxp.cli.config.expand(config.configuration_data)
 
-    if 'session_name' not in config:
+    if "session_name" not in config:
         raise ValidationError("No session name configured")
 
-    return  config
+    return config
 
 
 def start_session(session_name):
