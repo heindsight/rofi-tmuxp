@@ -2,10 +2,9 @@
 name: Tests
 
 on:
-  pull_request:
-  schedule:
-    # Run tests monthly
-    - cron: "15 0 1 * *"
+  push:
+    branches:
+      - '*'
 
 jobs:
   test:

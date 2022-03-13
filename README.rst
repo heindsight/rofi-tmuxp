@@ -15,8 +15,8 @@ Rofi TmuxP
 .. image:: https://img.shields.io/pypi/format/rofi-tmuxp.svg
     :target: https://pypi.org/project/rofi-tmuxp/
 
-.. image:: https://github.com/heindsight/rofi-tmuxp/workflows/Tests/badge.svg
-    :target: https://github.com/heindsight/rofi-tmuxp/actions?query=workflow%3ATests
+.. image:: https://github.com/heindsight/rofi-tmuxp/actions/workflows/test.yaml/badge.svg?branch=develop
+    :target: https://github.com/heindsight/rofi-tmuxp/actions/workflow/test.yaml/query=branch%3Adevelop
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/psf/black
@@ -47,7 +47,10 @@ you rofi config file.  E.g.
 
 .. code-block::
 
-   rofi.modi: run,ssh,tmuxp:rofi-tmuxp
+   configuration {
+       /* Enable run and tmuxp modes */
+       modi: "run,tmuxp:rofi-tmuxp";
+   }
 
 Then you can run rofi like:
 
