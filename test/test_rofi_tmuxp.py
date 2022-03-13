@@ -111,7 +111,7 @@ class TestPrintsSessions:
         match_logs(
             "rofi_tmuxp",
             logging.WARNING,
-            r'Invalid config \'{}\': config requires "session_name"'.format(
+            r'Invalid config \'{}\': No session name configured'.format(
                 config_dir / "invalid.yaml"
             ),
             caplog.record_tuples,
