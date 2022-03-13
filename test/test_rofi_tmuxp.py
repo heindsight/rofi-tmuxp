@@ -67,6 +67,11 @@ def session_info(session_cfg):
             "filetype": "yaml",
             "data": {**session_cfg, "session_name": "Session 💩"},
         },
+        {
+            "filename": "expand.yaml",
+            "filetype": "yaml",
+            "data": {**session_cfg, "session_name": "${EXPAND_ENV} session"},
+        },
     ]
 
 
@@ -83,15 +88,19 @@ class TestPrintsSessions:
             yield
 
     @pytest.mark.usefixtures("configs")
-    def test_prints_sessions(self, config_dir, capsys):
+    def test_prints_sessions(self, monkeypatch, config_dir, capsys):
+        monkeypatch.setenv("EXPAND_ENV", "expanded")
         rofi_tmuxp.main()
 
         captured = capsys.readouterr()
-        assert captured.out.splitlines() == [
-            "Session 💩",
-            "test session 1",
-            "田中さんにあげて下さい",
-        ]
+        assert sorted(captured.out.splitlines()) == sorted(
+            [
+                "Session 💩",
+                "test session 1",
+                "田中さんにあげて下さい",
+                "expanded session",
+            ]
+        )
 
     def test_ignore_sessions_without_name(
         self, session_info, config_dir, config_file, caplog, capsys
