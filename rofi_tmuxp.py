@@ -11,6 +11,10 @@ from kaptan import Kaptan
 logger = logging.getLogger("rofi_tmuxp")
 
 
+class ValidationError(Exception):
+    pass
+
+
 def main():
     """Main script entrypoint.
 
@@ -39,7 +43,7 @@ def get_sessions():
         config_path = config_dir / filename
         try:
             config = _load_config(config_path)
-        except tmuxp.exc.ConfigError as e:
+        except ValidationError as e:
             logger.warning("Invalid config '%s': %s", config_path, e)
         except Exception as e:
             logger.warning("Error loading config '%s': %r", config_path, e)
@@ -50,15 +54,15 @@ def get_sessions():
 def _load_config(cfg_path):
     """Load config from a given config file.
 
-    Raises tmuxp.exc.ConfigError if the config is not valid."""
+    Raises `ValidationError` if the config does not define a session name"""
     config = Kaptan()
     config.import_config(str(cfg_path))
-    config = config.configuration_data
+    config = tmuxp.cli.config.expand(config.configuration_data)
 
-    tmuxp.config.validate_schema(config)
+    if "session_name" not in config:
+        raise ValidationError("No session name configured")
 
-    config = tmuxp.cli.config.expand(config)
-    return tmuxp.cli.config.trickle(config)
+    return config
 
 
 def start_session(session_name):
