@@ -8,6 +8,13 @@ import tmuxp
 from kaptan import Kaptan
 
 
+try:
+    # get_config_dir moved to `tmuxp.cli.utils` in tmuxp 1.11.0
+    from tmuxp.cli.utils import get_config_dir
+except ImportError:  # pragma: no cover
+    from tmuxp.cli import get_config_dir
+
+
 logger = logging.getLogger("rofi_tmuxp")
 
 
@@ -45,7 +52,7 @@ def get_sessions():
 
     Returns a dictionary mapping session name to config file paths.
     """
-    config_dir = Path(tmuxp.cli.get_config_dir())
+    config_dir = Path(get_config_dir())
     sessions = {}
 
     for filename in tmuxp.config.in_dir(str(config_dir)):
@@ -68,7 +75,7 @@ def _load_config(cfg_path):
     Raises `ValidationError` if the config does not define a session name"""
     config = Kaptan()
     config.import_config(str(cfg_path))
-    config = tmuxp.cli.config.expand(config.configuration_data)
+    config = tmuxp.config.expand(config.configuration_data)
 
     if "session_name" not in config:
         raise ValidationError("No session name configured")

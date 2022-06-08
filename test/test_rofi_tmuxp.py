@@ -40,7 +40,7 @@ def config_file(write_config):
 
 @pytest.fixture(autouse=True)
 def mock_get_config_dir(mocker, config_dir):
-    m = mocker.patch("rofi_tmuxp.tmuxp.cli.get_config_dir")
+    m = mocker.patch("rofi_tmuxp.get_config_dir")
     m.return_value = str(config_dir)
 
 
