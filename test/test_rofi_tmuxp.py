@@ -42,6 +42,7 @@ def config_file(write_config):
 def mock_get_config_dir(mocker, config_dir):
     m = mocker.patch("rofi_tmuxp.get_config_dir")
     m.return_value = str(config_dir)
+    return m
 
 
 @pytest.fixture
@@ -82,7 +83,7 @@ def configs(config_file, session_info):
 
 class TestPrintsSessions:
     @pytest.fixture(autouse=True)
-    def patch_argv(self, monkeypatch):
+    def _patch_argv(self, monkeypatch):
         with monkeypatch.context() as m:
             m.setattr("sys.argv", ["rofi-tmuxp"])
             yield
@@ -193,7 +194,7 @@ class TestLaunchSession:
         return mocker.patch("subprocess.Popen")
 
     @pytest.mark.parametrize(
-        "session_name, config_filename",
+        ("session_name", "config_filename"),
         [
             ("test session 1", "test1.yml"),
             ("田中さんにあげて下さい", "( ͡° ͜ʖ ͡°).json"),
