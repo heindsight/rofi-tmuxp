@@ -5,8 +5,17 @@ import sys
 from pathlib import Path
 
 import tmuxp
-from kaptan import Kaptan
 
+
+try:
+    # ConfigReader is only available in tmuxp >= 1.16.0
+    from tmuxp.config_reader import ConfigReader
+
+    have_config_reader = True  # pragma: no cover
+except ImportError:  # pragma: no cover
+    import yaml
+
+    have_config_reader = False
 
 try:
     # get_config_dir moved to `tmuxp.cli.utils` in tmuxp 1.11.0
@@ -73,9 +82,13 @@ def _load_config(cfg_path):
     """Load config from a given config file.
 
     Raises `ValidationError` if the config does not define a session name"""
-    config = Kaptan()
-    config.import_config(str(cfg_path))
-    config = tmuxp.config.expand(config.configuration_data)
+    if have_config_reader:  # pragma: no cover
+        cfg_reader = ConfigReader.from_file(cfg_path)
+        config = cfg_reader.content
+    else:  # pragma: no cover
+        config = yaml.safe_load(cfg_path.read_text())
+
+    tmuxp.config.expand(config)
 
     if "session_name" not in config:
         raise ValidationError("No session name configured")
