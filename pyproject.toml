@@ -36,6 +36,10 @@ dev = [
     "flake8-pytest-style",
     "isort ~= 5.0.0",
     "pdbpp",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-randomly",
     "rstcheck",
 ]
 
