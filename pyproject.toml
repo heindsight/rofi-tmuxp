@@ -32,7 +32,6 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "black",
-    "coverage-conditional-plugin",
     "flake8",
     "flake8-pytest-style",
     "isort ~= 5.0.0",
