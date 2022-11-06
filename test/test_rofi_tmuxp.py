@@ -40,7 +40,7 @@ def config_file(write_config):
 
 @pytest.fixture(autouse=True)
 def mock_get_config_dir(mocker, config_dir):
-    m = mocker.patch("rofi_tmuxp.get_config_dir")
+    m = mocker.patch("rofi_tmuxp.tmuxp_client.get_workspace_dir")
     m.return_value = str(config_dir)
     return m
 
@@ -119,7 +119,7 @@ class TestPrintsSessions:
 
         assert captured.out == "test session 1\n"
         match_logs(
-            "rofi_tmuxp",
+            "rofi_tmuxp.sessions",
             logging.WARNING,
             r"Invalid config \'{}\': No session name configured".format(
                 config_dir / "invalid.yaml"
@@ -146,8 +146,8 @@ class TestPrintsSessions:
         captured = capsys.readouterr()
         assert captured.out == "test session 1\n"
         match_logs(
-            "rofi_tmuxp",
-            logging.WARNING,
+            "rofi_tmuxp.sessions",
+            logging.ERROR,
             r"Error loading config '{}'".format(config_dir / bad_filename),
             caplog.record_tuples,
         )
@@ -179,8 +179,8 @@ class TestPrintsSessions:
         assert captured.out == ""
 
         match_logs(
-            "rofi_tmuxp",
-            logging.WARNING,
+            "rofi_tmuxp.sessions",
+            logging.ERROR,
             r"Error loading config '{}': ConstructorError".format(
                 config_dir / "danger.yaml"
             ),
@@ -235,7 +235,7 @@ class TestLaunchSession:
             )
         ]
         match_logs(
-            "rofi_tmuxp",
+            "rofi_tmuxp.cli",
             logging.WARNING,
             r"No such session: I don't exist",
             caplog.record_tuples,
