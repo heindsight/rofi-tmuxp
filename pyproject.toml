@@ -31,17 +31,22 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = [
+lint = [
     "black",
     "flake8",
     "flake8-pytest-style",
     "isort ~= 5.0.0",
+    "rstcheck",
+]
+dev = [
     "pdbpp",
+]
+test = [
+    "coverage-conditional-plugin",
     "pytest",
     "pytest-cov",
     "pytest-mock",
     "pytest-randomly",
-    "rstcheck",
 ]
 
 [project.license]
