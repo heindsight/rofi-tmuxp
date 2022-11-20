@@ -22,7 +22,7 @@ def get_sessions() -> Dict[str, Path]:
 
     for config_path in _get_config_paths():
         try:
-            config = _read_config_file(config_path)
+            config = _load_session_config(config_path)
         except ValidationError as e:
             logger.warning("Invalid config '%s': %s", config_path, e)
         except Exception as e:
@@ -42,16 +42,15 @@ def _get_config_paths() -> Iterator[Path]:
     )
 
 
-def _read_config_file(config_path: Path) -> tmuxp_client.Config:
-    """Read a tmuxp session config  file.
+def _load_session_config(config_path: Path) -> tmuxp_client.Config:
+    """Load a tmuxp session config file.
 
-    If `tmuxp.config_reader.ConfigReader` is available, use that. Otherwise, fall back
-    to `yaml.safe_load`.
+
+    Raises `ValidationError` if there is no `session_name` defined in the config file.
     """
-    cfg_reader = tmuxp_client.ConfigReader.from_file(config_path)
-    config = tmuxp_client.expand_config(cfg_reader.content)
+    raw_config = tmuxp_client.read_config_file(config_path)
 
-    if "session_name" not in config:
+    if "session_name" not in raw_config:
         raise ValidationError("No session name configured")
 
-    return config
+    return tmuxp_client.expand_config(raw_config)

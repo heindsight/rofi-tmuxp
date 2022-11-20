@@ -3,27 +3,17 @@ from pathlib import Path
 from typing import Any, Dict
 
 
-Config = Dict[str, Any]
-
 try:
+    _have_config_reader = True
     from tmuxp.config_reader import ConfigReader
 except ImportError:  # no_cover_tmuxp_gte_1_16
     # In tmuxp < 1.16, 3d party library `Kaptan` was used to read config files.
-    # `Kaptan` is just a wrapper around `yaml.safe_load` and `json.load`. Since Yaml is
-    # a superset of JSON, we just use `yaml.safe_load` and wrap it in a class with
-    # a similar interface to `tmuxp.config_reader.ConfigReader`.
+    # `Kaptan` is just a wrapper around `PyYAML` and `json`. Since Yaml is a superset of
+    # JSON, we'll just use `yaml.safe_load`.
     import yaml
 
-    class _ConfigReader:
-        def __init__(self, content: Config):
-            self.content = content
+    _have_config_reader = False
 
-        @classmethod
-        def from_file(cls, config_path: Path) -> "_ConfigReader":
-            data = yaml.safe_load(config_path.read_text())
-            return cls(data)
-
-    ConfigReader = _ConfigReader
 
 try:
     from tmuxp.workspace.loader import expand as expand_config
@@ -51,8 +41,24 @@ except ImportError:  # no_cover_tmuxp_gte_1_18
 
 __all__ = [
     "Config",
-    "ConfigReader",
+    "configs_in_dir",
     "expand_config",
     "get_workspace_dir",
-    "configs_in_dir",
+    "read_config_file",
 ]
+
+
+Config = Dict[str, Any]
+
+
+def read_config_file(config_path: Path) -> Config:
+    """Read a tmuxp session config  file.
+
+    If `tmuxp.config_reader.ConfigReader` is available, use that. Otherwise, fall back
+    to `yaml.safe_load`.
+    """
+    if _have_config_reader:  # no_cover_tmuxp_lt_1_16
+        cfg_reader = ConfigReader.from_file(config_path)
+        return cfg_reader.content
+    else:  # no_cover_tmuxp_gte_1_16
+        return yaml.safe_load(config_path.read_text())
