@@ -1,4 +1,10 @@
 """Tmuxp compatibility layer"""
+from pathlib import Path
+from typing import Any, Dict
+
+
+Config = Dict[str, Any]
+
 try:
     from tmuxp.config_reader import ConfigReader
 except ImportError:  # pragma: has_tmuxp_1_16
@@ -9,11 +15,11 @@ except ImportError:  # pragma: has_tmuxp_1_16
     import yaml
 
     class _ConfigReader:
-        def __init__(self, content):
+        def __init__(self, content: Config):
             self.content = content
 
         @classmethod
-        def from_file(cls, config_path):
+        def from_file(cls, config_path: Path) -> "_ConfigReader":
             data = yaml.safe_load(config_path.read_text())
             return cls(data)
 
@@ -43,4 +49,10 @@ except ImportError:  # pragma: has_tmuxp_1_18
     from tmuxp.config import in_dir as configs_in_dir
 
 
-__all__ = ["ConfigReader", "expand_config", "get_workspace_dir", "configs_in_dir"]
+__all__ = [
+    "Config",
+    "ConfigReader",
+    "expand_config",
+    "get_workspace_dir",
+    "configs_in_dir",
+]

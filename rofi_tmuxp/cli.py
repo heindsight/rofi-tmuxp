@@ -34,7 +34,7 @@ def main():
             print(session_name)
 
 
-def _parse_args():
+def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("session", help="Name of the session to load", nargs="?")
     parser.add_argument("--quiet", help="Reduce log verbosity", action="store_true")
@@ -42,7 +42,7 @@ def _parse_args():
     return args
 
 
-def _setup_logging(quiet):
+def _setup_logging(quiet: bool):
     logging.basicConfig(
         style="{",
         level=logging.ERROR if quiet else logging.INFO,

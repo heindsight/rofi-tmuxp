@@ -36,7 +36,10 @@ lint = [
     "flake8",
     "flake8-pytest-style",
     "isort ~= 5.0.0",
+    "pytest",
+    "mypy",
     "rstcheck",
+    "types-pyyaml",
 ]
 dev = [
     "pdbpp",
@@ -68,3 +71,7 @@ exclude = [".github/", ".gitignore"]
 [tool.isort]
 profile="black"
 lines_after_imports = 2
+
+[[tool.mypy.overrides]]
+module = "tmuxp.*"
+ignore_missing_imports = true

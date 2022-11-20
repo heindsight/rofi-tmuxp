@@ -1,6 +1,7 @@
 """Work with tmuxp sessions"""
 import logging
 from pathlib import Path
+from typing import Dict, Iterator
 
 from . import tmuxp_client
 
@@ -12,7 +13,7 @@ class ValidationError(Exception):
     pass
 
 
-def get_sessions():
+def get_sessions() -> Dict[str, Path]:
     """Get tmuxp sessions.
 
     Returns a dictionary mapping session name to config file paths.
@@ -32,7 +33,7 @@ def get_sessions():
     return sessions
 
 
-def _get_config_paths():
+def _get_config_paths() -> Iterator[Path]:
     config_dir = Path(tmuxp_client.get_workspace_dir())
 
     yield from (
@@ -41,7 +42,7 @@ def _get_config_paths():
     )
 
 
-def _read_config_file(config_path):
+def _read_config_file(config_path: Path) -> tmuxp_client.Config:
     """Read a tmuxp session config  file.
 
     If `tmuxp.config_reader.ConfigReader` is available, use that. Otherwise, fall back
