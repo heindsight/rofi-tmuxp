@@ -1,4 +1,4 @@
-"""Work with tmuxp sessions"""
+"""Work with tmuxp sessions."""
 import logging
 from pathlib import Path
 from typing import Dict, Iterator
@@ -44,7 +44,6 @@ def _get_config_paths() -> Iterator[Path]:
 
 def _load_session_config(config_path: Path) -> tmuxp_client.Config:
     """Load a tmuxp session config file.
-
 
     Raises `ValidationError` if there is no `session_name` defined in the config file.
     """

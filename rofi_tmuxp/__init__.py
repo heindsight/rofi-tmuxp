@@ -1,4 +1,4 @@
-"""Rofi script to launch tmuxp sessions"""
+"""Rofi script to launch tmuxp sessions."""
 from .cli import main
 
 

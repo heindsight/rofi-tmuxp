@@ -1,4 +1,4 @@
-"""Functions to drive the commandline interface"""
+"""Functions to drive the commandline interface."""
 import argparse
 import logging
 
@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 def main():
     """Main script entrypoint.
 
-    If no command line arguments are provided, print out a list of available
-    sessions. Otherwise, run tmuxp in a new terminal with the session provided
-    on the command line.
+    If no command line arguments are provided, print out a list of available sessions.
+    Otherwise, run tmuxp in a new terminal with the session provided on the command
+    line.
     """
     args = _parse_args()
     _setup_logging(args.quiet)

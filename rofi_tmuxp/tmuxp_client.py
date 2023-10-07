@@ -1,4 +1,4 @@
-"""Tmuxp compatibility layer"""
+"""Tmuxp compatibility layer."""
 from pathlib import Path
 from typing import Any, Dict
 

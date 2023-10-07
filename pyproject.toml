@@ -34,8 +34,9 @@ dependencies = [
 lint = [
     "black",
     "flake8",
+    "docformatter",
     "flake8-pytest-style",
-    "isort ~= 5.0.0",
+    "isort",
     "pytest",
     "mypy",
     "rstcheck",
@@ -75,3 +76,6 @@ lines_after_imports = 2
 [[tool.mypy.overrides]]
 module = "tmuxp.*"
 ignore_missing_imports = true
+
+[tool.docformatter]
+black = true
