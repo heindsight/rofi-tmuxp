@@ -11,6 +11,8 @@ readme = "README.rst"
 version = "0.5.0"
 dynamic = ["description"]
 keywords = ["rofi", "tmux", "tmuxp"]
+licence = {file = "LICENSE"}
+urls = {Homepage = "https://github.com/heindsight/rofi-tmuxp"}
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: End Users/Desktop",
@@ -26,13 +28,14 @@ classifiers = [
 requires-python = "~=3.8"
 dependencies = [
     "pyyaml",
-    "tmuxp ~= 1.1"
+    "tmuxp ~= 1.1",
 ]
 
 [project.optional-dependencies]
 lint = [
     "black",
     "flake8",
+    "flake8-pyproject",
     "docformatter",
     "flake8-pytest-style",
     "isort",
@@ -52,12 +55,6 @@ test = [
     "pytest-randomly",
 ]
 
-[project.license]
-file = "LICENSE"
-
-[project.urls]
-Homepage = "https://github.com/heindsight/rofi-tmuxp"
-
 [project.scripts]
 rofi-tmuxp = "rofi_tmuxp:main"
 
@@ -72,9 +69,28 @@ exclude = [".github/", ".gitignore"]
 profile="black"
 lines_after_imports = 2
 
-[[tool.mypy.overrides]]
-module = "tmuxp.*"
-ignore_missing_imports = true
-
 [tool.docformatter]
 black = true
+
+[tool.flake8]
+max-line-length = 88
+pytest-fixture-no-parentheses = true
+
+[tool.pytest.ini_options]
+addopts = [
+    "--cov=rofi_tmuxp",
+    "--cov=test",
+    "--cov-report=term-missing",
+    "--cov-fail-under=100",
+    "--cov-branch",
+    "--no-cov-on-fail",
+]
+
+[tool.coverage]
+plugins = ["coverage_conditional_plugin"]
+
+[tool.coverage.coverage_conditional_plugin.rules]
+no_cover_tmuxp_gte_1_11 = "package_version('tmuxp') >= (1, 11, 0)"
+no_cover_tmuxp_lt_1_16 = "package_version('tmuxp') < (1, 16, 0)"
+no_cover_tmuxp_gte_1_16 = "package_version('tmuxp') >= (1, 16, 0)"
+no_cover_tmuxp_gte_1_18 = "package_version('tmuxp') >= (1, 18, 0)"
