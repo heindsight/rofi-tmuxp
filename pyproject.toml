@@ -91,6 +91,4 @@ plugins = ["coverage_conditional_plugin"]
 
 [tool.coverage.coverage_conditional_plugin.rules]
 no_cover_tmuxp_gte_1_11 = "package_version('tmuxp') >= (1, 11, 0)"
-no_cover_tmuxp_lt_1_16 = "package_version('tmuxp') < (1, 16, 0)"
-no_cover_tmuxp_gte_1_16 = "package_version('tmuxp') >= (1, 16, 0)"
 no_cover_tmuxp_gte_1_18 = "package_version('tmuxp') >= (1, 18, 0)"
