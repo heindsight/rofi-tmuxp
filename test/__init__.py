@@ -1,9 +1,12 @@
 import re
+from typing import List, Tuple
 
 import pytest
 
 
-def match_logs(logger, level, pattern, record_tuples):
+def match_logs(
+    logger: str, level: int, pattern: str, record_tuples: List[Tuple[str, int, str]]
+) -> None:
     """Assert that the given patten is matched in the logs.
 
     This assertion helper looks for a log message from the given `logger` at the given

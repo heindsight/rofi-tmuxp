@@ -5,14 +5,14 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "rofi-tmuxp"
 authors = [
-    {name = "Heinrich Kruger", email = "heindsight@kruger.dev"}
+    {name = "Heinrich Kruger", email = "heindsight@kruger.dev"},
 ]
 readme = "README.rst"
 version = "0.5.0"
 dynamic = ["description"]
-keywords = ["rofi", "tmux", "tmuxp"]
 licence = {file = "LICENSE"}
 urls = {Homepage = "https://github.com/heindsight/rofi-tmuxp"}
+keywords = ["rofi", "tmux", "tmuxp"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: End Users/Desktop",
@@ -32,27 +32,22 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-lint = [
+dev = [
     "black",
+    "docformatter",
     "flake8",
     "flake8-pyproject",
-    "docformatter",
     "flake8-pytest-style",
     "isort",
-    "pytest",
     "mypy",
-    "rstcheck",
-    "types-pyyaml",
-]
-dev = [
     "pdbpp",
-]
-test = [
     "coverage-conditional-plugin",
     "pytest",
     "pytest-cov",
     "pytest-mock",
     "pytest-randomly",
+    "rstcheck",
+    "types-pyyaml",
 ]
 
 [project.scripts]
@@ -66,7 +61,7 @@ include = ["test/", "tox.ini"]
 exclude = [".github/", ".gitignore"]
 
 [tool.isort]
-profile="black"
+profile = "black"
 lines_after_imports = 2
 
 [tool.docformatter]
@@ -74,21 +69,30 @@ black = true
 
 [tool.flake8]
 max-line-length = 88
+extend-ignore = "E203"
 pytest-fixture-no-parentheses = true
 
 [tool.pytest.ini_options]
 addopts = [
-    "--cov=rofi_tmuxp",
-    "--cov=test",
-    "--cov-report=term-missing",
-    "--cov-fail-under=100",
-    "--cov-branch",
+    "--cov",
     "--no-cov-on-fail",
 ]
 
-[tool.coverage]
+[tool.coverage.run]
 plugins = ["coverage_conditional_plugin"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
 
 [tool.coverage.coverage_conditional_plugin.rules]
 no_cover_tmuxp_gte_1_11 = "package_version('tmuxp') >= (1, 11, 0)"
 no_cover_tmuxp_gte_1_18 = "package_version('tmuxp') >= (1, 18, 0)"
+
+[tool.mypy]
+strict = true
+
+[[tool.mypy.overrides]]
+module = "tmuxp.*"
+ignore_missing_imports = true

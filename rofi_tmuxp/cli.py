@@ -1,4 +1,5 @@
 """Functions to drive the commandline interface."""
+
 import argparse
 import logging
 
@@ -8,7 +9,7 @@ from . import rofi_client, sessions
 logger = logging.getLogger(__name__)
 
 
-def main():
+def main() -> None:
     """Main script entrypoint.
 
     If no command line arguments are provided, print out a list of available sessions.
@@ -42,7 +43,7 @@ def _parse_args() -> argparse.Namespace:
     return args
 
 
-def _setup_logging(quiet: bool):
+def _setup_logging(quiet: bool) -> None:
     logging.basicConfig(
         style="{",
         level=logging.ERROR if quiet else logging.INFO,
