@@ -41,7 +41,7 @@ jobs:
           name: dist-packages
           path: dist
       - name: Publish
-        uses: pypa/gh-action-pypi-publish@v1
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
@@ -60,7 +60,7 @@ jobs:
           name: dist-packages
           path: dist
       - name: publish
-        uses: pypa/gh-action-pypi-publish@v1
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
