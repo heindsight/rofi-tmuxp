@@ -32,7 +32,11 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     needs: build
     runs-on: ubuntu-latest
-    environment: "Test PyPI"
+    environment:
+      name: "Test PyPI"
+      url: ${{ vars.URL }}
+    permissions:
+      id-token: write
 
     steps:
       - name: Download dist artifacts
@@ -43,15 +47,15 @@ jobs:
       - name: Publish
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          user: __token__
-          password: ${{ secrets.PYPI_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
 
   publish-pypi:
     if: github.event_name == 'release'
     needs: build
     runs-on: ubuntu-latest
-    environment: PyPI
+    environment:
+      name: PyPI
+      url: ${{ vars.URL }}
 
     steps:
       - name: Download dist artifacts
@@ -61,6 +65,3 @@ jobs:
           path: dist
       - name: publish
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_TOKEN }}
