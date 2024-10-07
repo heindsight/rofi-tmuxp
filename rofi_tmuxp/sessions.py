@@ -1,4 +1,5 @@
-"""Work with tmuxp sessions"""
+"""Work with tmuxp sessions."""
+
 import logging
 from pathlib import Path
 from typing import Dict, Iterator
@@ -45,7 +46,6 @@ def _get_config_paths() -> Iterator[Path]:
 def _load_session_config(config_path: Path) -> tmuxp_client.Config:
     """Load a tmuxp session config file.
 
-
     Raises `ValidationError` if there is no `session_name` defined in the config file.
     """
     raw_config = tmuxp_client.read_config_file(config_path)
@@ -53,4 +53,5 @@ def _load_session_config(config_path: Path) -> tmuxp_client.Config:
     if "session_name" not in raw_config:
         raise ValidationError("No session name configured")
 
-    return tmuxp_client.expand_config(raw_config)
+    cfg: tmuxp_client.Config = tmuxp_client.expand_config(raw_config)
+    return cfg
