@@ -8,7 +8,7 @@ authors = [
     {name = "Heinrich Kruger", email = "heindsight@kruger.dev"},
 ]
 readme = "README.rst"
-version = "0.5.1.dev1"
+version = "0.6.0"
 dynamic = ["description"]
 licence = {file = "LICENSE"}
 urls = {Homepage = "https://github.com/heindsight/rofi-tmuxp"}
