@@ -15,7 +15,7 @@ Rofi TmuxP
 .. image:: https://img.shields.io/pypi/format/rofi-tmuxp.svg
     :target: https://pypi.org/project/rofi-tmuxp/
 
-.. image:: https://github.com/heindsight/rofi-tmuxp/actions/workflows/test.yaml/badge.svg?branch=develop
+.. image:: https://github.com/heindsight/rofi-tmuxp/actions/workflows/test.yaml/badge.svg?branch=master
     :target: https://github.com/heindsight/rofi-tmuxp/actions/workflows/test.yaml?query=branch%3Adevelop
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
